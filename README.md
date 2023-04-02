@@ -1,5 +1,3 @@
-# vim: set ft=rst:
-
-See https://help.pythonanywhere.com/ (or click the "Help" link at the top
-right) for help on how to use PythonAnywhere, including tips on copying and
-pasting from consoles, and writing your own web applications.
+># `Page View Counter`
+>
+>![image](https://user-images.githubusercontent.com/50515418/229353142-54e24cdd-2c76-4181-99dc-c5ead327a136.png)
