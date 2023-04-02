@@ -1,0 +1,132 @@
+
+{% extends "base.html"%}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+    <link rel="icon" href="static/online.png">
+    <title>Attendance</title>
+
+  </head>
+  <body>
+    <center>
+
+      <div class="jumbotron">
+        <a target = '_blank' href="{{url}}">
+          <h2>Page Views = {{g}}</h2>
+        </a>
+        <br>
+
+        {% if added %}
+
+          <a target='_blank' href="https://mail.google.com/chat/u/2/#chat/space/AAAAJd5Znh4">
+              <h2>
+                <strong>
+                  Attendance Done for Today
+                  <br>
+                  You may Update.
+                </strong>
+              </h2>
+          </a>
+
+          <br>
+        {% else %}
+
+          <button type="button"
+          onclick="document.getElementById('demo').innerHTML = Date()">
+          Click me to display Date and Time.</button>
+
+          <br><br>
+          <p id="demo"></p>
+          <br>
+        {% endif %}
+
+        <form method="post" action="/attendance">
+          <div class="alert alert-light" role="alert">
+
+            <br>
+            {% for i in Name %}
+              <div class="alert alert-danger" role="alert">
+
+                <br>
+                <input type="checkbox"
+                style="height:40px; width:40px"
+                name="{{i}}" value="{{i}}">
+
+                <h3>
+                  <strong>
+                    {{i}}
+                  </strong>
+                </h3>
+              </div>
+
+              <br/>
+            {% endfor %}
+
+            <div class="alert alert-success" role="alert">
+              <br>
+              <div class="alert alert-light" role="alert">
+                <iframe frameborder="0" scrolling="yes" width="100%" height="400"
+                   src="/vicksmail" name="imgbox" id="imgbox">
+                </iframe>
+              </div>
+
+              <br>
+              <input type="text" name="otp"
+              style="height:40px; width:450px"
+              placeholder="Check your Mail and Enter OTP here, then Press Submit"/>
+              <br><br>
+
+              <input placeholder="Enter Password"
+              type="password" name="auth_check">
+              <br>
+            </div>
+
+            <input type="image"
+               src="../static/submit.png"
+               width="200"
+               height="60"
+               alt="submit"/>
+          </div>
+        </form>
+      </div>
+
+      <br><br>
+      <div class="jumbotron">
+        <a target="_blank" href="https://docs.google.com/spreadsheets/d/1Va2O06m-sBdjHmxkvl4TpkC-ghm6U8jkFxhShDHDWLE/edit?hl=en&forcehl=1#gid=1251099130">
+          <img src="data:image/png;base64,{{plotted[0]}}">
+        </a>
+        <br><br>
+
+        <div class="alert alert-light" role="alert">
+          <br>
+
+          <table>
+          {% for key, value in plotted[1].items() %}
+             <tr>
+                <th>
+                  <div class="alert alert-success" role="alert">
+                    <h2>{{ key }}</h2>
+                  </div>
+                </th>
+
+                <td>
+                  <div class="alert alert-danger" role="alert">
+                    <h2>{{ value }}</h2>
+                  </div>
+                </td>
+             </tr>
+          {% endfor %}
+          </table>
+
+        </div>
+      </div>
+
+    </center>
+  </body>
+</html>
+
+{% endblock %}
