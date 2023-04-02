@@ -1,26 +1,40 @@
 
+from flask import Flask, render_template, jsonify
+from firebase_admin import db
+import firebase_admin
+
+
+app = Flask(__name__)
+app.jinja_env.globals.update(zip=zip)
+
+
 def run():
-    from firebase_admin import credentials
-    import firebase_admin, os
-
-    path = './Clouix/Firebase'
-    file = 'ideationology-4c639-firebase-adminsdk-5hfwu-5806b97f02.json'
-    dir = os.path.join(path, file)
-
-    # cred = credentials.Certificate(dir)
-    cred = credentials.Certificate(file)
+    file = 'ideationology.json'
+    cred = firebase_admin.credentials.Certificate(file)
 
     url = 'https://ideationology-4c639-default-rtdb.asia-southeast1.firebasedatabase.app/'
     path = {'databaseURL' : url}
 
     if not firebase_admin._apps:
-        # print('========> ', firebase_admin._apps)
         firebase_admin.initialize_app(cred, path)
 
-    from firebase_admin import db
-    refv = db.reference('counter/views')
+    refv = db.reference('pythonanywhere/views')
+    g = refv.get() +1
 
-    g = refv.get()
-    g = g + 1
     refv.set(g)
     return g, url
+
+
+@app.route('/')
+def index():
+    views = run()[0]
+    return jsonify({"Page view": str(views)}), 200
+
+
+if __name__ == '__main__':
+    app.secret_key = "123"
+    app.run(debug=True)
+
+
+# bash : 
+# https://www.pythonanywhere.com/user/imvickykumar999/consoles/28083905/
