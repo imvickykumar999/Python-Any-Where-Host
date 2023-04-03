@@ -4,6 +4,6 @@
 >
 >---------------
 >
-># To download all folders from [pythonanywhere](https://www.pythonanywhere.com/user/imvickykumar999/consoles/28083777)
+># To download all folders from [pythonanywhere](https://www.pythonanywhere.com/user/imvickykumar999/consoles/)
 >
 >### `zip -r test.zip /home/imvickykumar999`
